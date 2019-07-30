@@ -1,0 +1,68 @@
+Arguments: 
+  D:\node.exe C:\Program Files\Yarn\bin\yarn.js add native-base --save
+
+PATH: 
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\;D:\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Yarn\bin\;C:\Users\Umair Dev\AppData\Local\Microsoft\WindowsApps;C:\Users\Umair Dev\AppData\Roaming\npm;D:\Microsoft VS Code\bin;C:\Users\Umair Dev\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  10.16.0
+
+Platform: 
+  win32 ia32
+
+Trace: 
+  Error: https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-2.5.0.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Program Files\Yarn\lib\cli.js:141091:19)
+      at Object.onceWrapper (events.js:286:20)
+      at ClientRequest.emit (events.js:198:13)
+      at TLSSocket.emitRequestTimeout (_http_client.js:662:40)
+      at Object.onceWrapper (events.js:286:20)
+      at TLSSocket.emit (events.js:198:13)
+      at TLSSocket.Socket._onTimeout (net.js:442:8)
+      at ontimeout (timers.js:436:11)
+      at tryOnTimeout (timers.js:300:5)
+      at listOnTimeout (timers.js:263:5)
+
+npm manifest: 
+  {
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+      "start": "expo start",
+      "android": "expo start --android",
+      "ios": "expo start --ios",
+      "eject": "expo eject"
+    },
+    "dependencies": {
+      "@expo/vector-icons": "^9.0.0",
+      "axios": "^0.18.0",
+      "expo": "^32.0.0",
+      "native-base": "^2.8.1",
+      "react": "16.5.0",
+      "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+      "react-native-device-info": "^0.25.1",
+      "react-native-easy-grid": "^0.2.0",
+      "react-native-elements": "^0.19.1",
+      "react-native-form-validator": "^0.2.0",
+      "react-native-image-slider": "^2.0.3",
+      "react-native-modal": "^7.0.2",
+      "react-navigation": "^3.0.9",
+      "react-redux": "^6.0.0",
+      "recompose": "^0.30.0",
+      "redux": "^4.0.1",
+      "redux-persist": "^5.10.0",
+      "redux-thunk": "^2.3.0"
+    },
+    "devDependencies": {
+      "babel-preset-expo": "^5.0.0"
+    },
+    "private": true
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
