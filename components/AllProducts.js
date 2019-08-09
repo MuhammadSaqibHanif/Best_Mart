@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { Root } from "native-base";
 import { Divider } from "react-native-elements";
+import Spinner from "react-native-loading-spinner-overlay";
+import { PRODUCTS } from "../Api";
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
+      loading: false
     };
   }
 
   componentDidMount() {
-    fetch(`https://bestmart.com.pk/bestmart_api/Get/get_allproducts.php`)
+    this.setState({
+      loading: true
+    });
+
+    fetch(`${PRODUCTS}`)
       .then(resp => resp.json())
       .then(response => {
         // console.log("response get_allproducts", response)
@@ -21,50 +28,58 @@ class Products extends Component {
             data: response
           });
         }
+
+        this.setState({
+          loading: false
+        });
       })
-      .catch(() => {});
+      .catch(() => {
+        this.setState({
+          loading: false
+        });
+      });
   }
 
   navigateFunc = (id, value, navigate, data) => {
-    fetch(`https://bestmart.com.pk/bestmart_api/Get/get_product_details.php?product_id=${id}`)
-    .then(res => res.json())
-    .then(response => {
-      console.log("response get_product_details", response)
-      if (response[0].name) {
-        this.props.navigate("ProductView", { response });
-      }
-    })
-    .catch(() =>
-      Toast.show({
-        text: "Network Error",
-        position: "bottom",
-        duration: 3000
-      })
-    );
+    this.setState({
+      loading: true
+    });
 
-    // fetch(`https://bestmart.com.pk/best_mart/api/get/products-by-category/${id}`)
-    //   .then(res => res.json())
-    //   .then(response => {
-    //     if (response[0].id) {
-    //       navigate("SubChildCategories", {
-    //         value: value,
-    //         childData: data,
-    //         navigate: navigate,
-    //         response: response
-    //       });
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    fetch(
+      `https://bestmart.com.pk/bestmart_api/Get/get_product_details.php?product_id=${id}`
+    )
+      .then(res => res.json())
+      .then(response => {
+        // console.log("response get_product_details", response)
+
+        this.setState({
+          loading: false
+        });
+
+        if (response[0].name) {
+          this.props.navigate("ProductView", { response });
+        }
+      })
+      .catch(() => {
+        this.setState({
+          loading: false
+        });
+      });
   };
 
   render() {
     const { Heading, navigate } = this.props;
-    const { data } = this.state;
+    const { data, loading } = this.state;
 
     return (
       <Root style={{ backgroundColor: "#3D3B48" }}>
+        <Spinner
+          visible={loading}
+          textContent={"Loading..."}
+          textStyle={{
+            color: "#FFF"
+          }}
+        />
         <View>
           <View>
             <Text
@@ -95,7 +110,7 @@ class Products extends Component {
                       key={index}
                       style={{
                         width: "49%",
-                        height: 130,
+                        height: 200,
                         borderWidth: 1,
                         borderRadius: 2,
                         borderColor: "#ddd",
@@ -109,14 +124,14 @@ class Products extends Component {
                         marginRight: 1,
                         marginTop: 2
                       }}
-                        onPress={() =>
-                          this.navigateFunc(value.id, value, navigate, data)
-                        }
+                      onPress={() =>
+                        this.navigateFunc(value.id, value, navigate, data)
+                      }
                     >
                       <Image
                         source={{ uri: value.image }}
                         style={{ flex: 1 }}
-                        resizeMode="cover"
+                        resizeMode="contain"
                       />
                       <View>
                         <Text

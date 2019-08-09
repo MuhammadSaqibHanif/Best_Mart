@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Button, Item, Input } from "native-base";
+import Spinner from "react-native-loading-spinner-overlay";
 import { connect } from "react-redux";
 import { updateUser } from "../Redux/actions/authActions";
+import { SIGNIN } from "../Api";
 
 class CheckoutAlreadyACustomer extends Component {
   static navigationOptions = {
@@ -13,15 +15,89 @@ class CheckoutAlreadyACustomer extends Component {
     super(props);
     this.state = {
       emailLogin: "",
-      passwordLogin: ""
+      passwordLogin: "",
+      loading: false
     };
   }
 
-  render() {
+  signIn = () => {
     const { emailLogin, passwordLogin } = this.state;
+
+    this.setState({
+      loading: true
+    });
+
+    // let formData = new FormData();
+    // formData.append("email", email);
+    // formData.append("password", password);
+
+    fetch(`${SIGNIN}?email=${emailLogin}&password=${passwordLogin}`, {
+      // body: formData,
+      method: "POST"
+    })
+      .then(res => res.json())
+      .then(response => {
+        console.log("reponse login >>>", response);
+
+        if (response[0].id) {
+          if (this.props.user) {
+            if (this.props.user.CartData) {
+              this.props.updateUser({
+                CartData: {
+                  ...this.props.user.CartData
+                },
+                userData: response[0],
+                UserId: response[0].id
+              });
+            }
+            if (!this.props.user.CartData) {
+              this.props.updateUser({
+                userData: response[0],
+                UserId: response[0].id
+              });
+            }
+          }
+
+          if (!this.props.user) {
+            this.props.updateUser({
+              userData: response[0],
+              UserId: response[0].id
+            });
+          }
+
+          this.props.updateLoginData();
+
+          this.setState({
+            emailLogin: "",
+            passwordLogin: ""
+          });
+        }
+
+        this.setState({
+          loading: false
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false
+        });
+
+        console.log("Error: SignIn*******", error);
+      });
+  };
+
+  render() {
+    const { emailLogin, passwordLogin, loading } = this.state;
 
     return (
       <View style={{ marginTop: 10 }}>
+        <Spinner
+          visible={loading}
+          textContent={"Loading..."}
+          textStyle={{
+            color: "#FFF"
+          }}
+        />
         <View
           style={{
             width: "95%",
@@ -65,11 +141,17 @@ class CheckoutAlreadyACustomer extends Component {
             <Item>
               <Input
                 placeholder="Password*"
+                secureTextEntry={true}
                 value={passwordLogin}
                 onChangeText={text => this.setState({ passwordLogin: text })}
               />
             </Item>
-            <Button bordered dark style={{ marginTop: 10, marginBottom: 5 }}>
+            <Button
+              bordered
+              dark
+              style={{ marginTop: 10, marginBottom: 5 }}
+              onPress={() => this.signIn()}
+            >
               <Text
                 style={{
                   paddingHorizontal: 10,

@@ -8,6 +8,7 @@ import {
   Image
 } from "react-native";
 import ImageSlider from "react-native-image-slider";
+import { BANNERS } from "../Api";
 
 class Slider extends Component {
   state = {
@@ -15,7 +16,7 @@ class Slider extends Component {
   };
 
   componentWillMount() {
-    fetch("https://bestmart.com.pk/bestmart_api/Get/get_all_banners.php")
+    fetch(`${BANNERS}`)
       .then(response => response.json())
       .then(response => {
         response.map(value =>

@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  ScrollView,
   KeyboardAvoidingView,
   Dimensions,
   Image,
@@ -11,19 +10,10 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from "react-native";
-import { Constants } from "expo";
-import {
-  Input,
-  Item,
-  Card,
-  Button,
-  Toast,
-  Root,
-  CheckBox,
-  Icon
-} from "native-base";
+import { Input, Item, Card, Toast, Root, CheckBox } from "native-base";
 import { connect } from "react-redux";
 import { updateUser } from "../Redux/actions/authActions";
+import { SIGNIN } from "../Api";
 
 class SignIn extends Component {
   constructor(props) {
@@ -54,13 +44,10 @@ class SignIn extends Component {
     // formData.append("email", email);
     // formData.append("password", password);
 
-    fetch(
-      `https://bestmart.com.pk/bestmart_api/Post/login.php?email=${email}&password=${password}`,
-      {
-        // body: formData,
-        method: "POST"
-      }
-    )
+    fetch(`${SIGNIN}?email=${email}&password=${password}`, {
+      // body: formData,
+      method: "POST"
+    })
       .then(res => res.json())
       .then(response => {
         console.log("reponse Signin", response);
@@ -76,7 +63,6 @@ class SignIn extends Component {
           // formDataLoginActivity.append("user_id", response);
           // formDataLoginActivity.append("status", 0);
 
-          // fetch("https://bestmart.com.pk/best_mart/api/post/login-activity-log?", {
           //   body: formDataLoginActivity,
           //   method: "post"
           // })
@@ -172,167 +158,182 @@ class SignIn extends Component {
     const { email, password, showActivityIndicator } = this.state;
 
     return (
-      <Root>
-        <View>
-          {/* <ScrollView> */}
-          <ImageBackground
-            source={require("../images/log-back.jpg")}
+      <View>
+        {/* <ScrollView> */}
+        <ImageBackground
+          source={require("../images/log-back.jpg")}
+          style={{
+            height: Dimensions.get("window").height
+            // backgroundColor: "blue",
+            // flexDirection: "column",
+            // justifyContent: "center",
+            // alignItems: "center"
+          }}
+        >
+          <Card
             style={{
-              height: Dimensions.get("window").height,
-              // backgroundColor: "blue",
-              // flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center"
+              backgroundColor: "A8A8A8",
+              flexDirection: "column",
+              alignSelf: "center",
+              alignItems: "center",
+              width: "90%",
+              borderRadius: 6,
+              marginTop: 20,
+              flex: 1
+              // justifyContent: "center"
             }}
           >
-            <Card
-              style={{
-                marginTop: -160,
-                backgroundColor: "A8A8A8",
-                flexDirection: "column",
-                alignItems: "center",
-                borderRadius: 6
-              }}
-            >
-              <Image
+            {/* <Image
                 source={require("../images/account.png")}
                 style={{ position: "absolute", top: -15, zIndex: 1 }}
-              />
-              <Text
-                style={{
-                  marginTop: 20,
-                  fontSize: 20,
-                  fontWeight: "500",
-                  color: "black"
-                }}
-              >
-                Sign In
-              </Text>
+              /> */}
+            <Text
+              style={{
+                marginTop: 20,
+                fontSize: 20,
+                fontWeight: "500",
+                color: "black"
+              }}
+            >
+              Sign In
+            </Text>
 
-              <View
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                marginTop: 40,
+                width: "95%",
+                borderRadius: 10
+              }}
+            >
+              <Item
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  marginTop: 40,
-                  width: "80%",
-                  borderRadius: 10
-                }}
-              >
-                <Item
-                  style={{
-                    width: "90%",
-                    backgroundColor: "white",
-                    borderRadius: 6
-                  }}
-                >
-                  <Image
-                    source={require("../images/person.png")}
-                    style={{ width: 20, height: 20, marginLeft: 10 }}
-                  />
-                  <Input
-                    placeholder="email"
-                    onChangeText={email => {
-                      this.setState({ email });
-                    }}
-                  />
-                </Item>
-              </View>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  marginTop: 20,
-                  width: "80%"
-                }}
-              >
-                <Item
-                  style={{
-                    width: "90%",
-                    backgroundColor: "white",
-                    borderRadius: 6
-                  }}
-                >
-                  <Image
-                    source={require("../images/lock.png")}
-                    style={{ width: 20, height: 20, marginLeft: 10 }}
-                  />
-                  <Input
-                    placeholder="password"
-                    secureTextEntry
-                    onChangeText={password => {
-                      this.setState({ password });
-                    }}
-                  />
-                </Item>
-              </View>
-
-              {showActivityIndicator && (
-                <ActivityIndicator size="small" color="#00ff00" />
-              )}
-
-              <View
-                style={{
-                  marginTop: 20,
-                  padding: 10,
+                  width: "90%",
                   backgroundColor: "white",
-                  alignItems: "center",
-                  width: "72%",
-                  borderRadius: 6,
-                  backgroundColor: "red"
+                  borderRadius: 6
                 }}
               >
-                <TouchableOpacity
-                  onPress={() => {
-                    this.signIn();
+                <Image
+                  source={require("../images/person.png")}
+                  style={{ width: 20, height: 20, marginLeft: 10 }}
+                />
+                <Input
+                  placeholder="email"
+                  onChangeText={email => {
+                    this.setState({ email });
                   }}
-                >
-                  <Text style={{ textAlign: "justify", color: "white" }}>
-                    Login
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View
+                />
+              </Item>
+            </View>
+
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                marginTop: 20,
+                width: "95%"
+              }}
+            >
+              <Item
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 20,
-                  marginBottom: 20
+                  width: "90%",
+                  backgroundColor: "white",
+                  borderRadius: 6
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    width: "55%"
+                <Image
+                  source={require("../images/lock.png")}
+                  style={{ width: 20, height: 20, marginLeft: 10 }}
+                />
+                <Input
+                  placeholder="password"
+                  secureTextEntry
+                  onChangeText={password => {
+                    this.setState({ password });
                   }}
-                >
-                  <CheckBox
-                    checked={true}
-                    style={{ backgroundColor: "red", borderColor: "white" }}
-                  />
-                  <Text style={{ marginLeft: 15, color: "white" }}>
-                    Remember Me
-                  </Text>
-                </View>
-                <Text style={{ color: "white" }}>Forgot Password?</Text>
-              </View>
-            </Card>
+                />
+              </Item>
+            </View>
+
+            {showActivityIndicator && (
+              <ActivityIndicator size="small" color="#00ff00" />
+            )}
+
             <View
               style={{
                 marginTop: 20,
-                width: "85%",
-                height: 2,
-                backgroundColor: "white"
+                padding: 10,
+                backgroundColor: "white",
+                alignItems: "center",
+                width: "80%",
+                borderRadius: 6,
+                backgroundColor: "red"
               }}
-            />
-            <Text style={{ marginTop: 10, color: "white" }}>
-              don't have an account ?{" "}
-              <Text style={{ color: "red" }}>Swipe right to register</Text>
-            </Text>
-          </ImageBackground>
-          {/* </ScrollView> */}
-        </View>
-      </Root>
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  this.signIn();
+                }}
+              >
+                <Text style={{ textAlign: "justify", color: "white" }}>
+                  Login
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+                marginBottom: 20
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  width: "55%"
+                }}
+              >
+                {/* <CheckBox
+                  checked={true}
+                  style={{ backgroundColor: "red", borderColor: "white" }}
+                />
+                <Text style={{ marginLeft: 15, color: "white" }}>
+                  Remember Me
+                </Text> */}
+              </View>
+              <TouchableOpacity
+                onPress={() => this.props.navigate("ForgetPassword")}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    marginRight: 30,
+                    fontSize: 16
+                  }}
+                >
+                  Forgot your Password?
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Card>
+          <View
+            style={{
+              marginTop: 20,
+              width: "85%",
+              height: 2,
+              backgroundColor: "white"
+            }}
+          />
+          <Text style={{ marginTop: 10, color: "white" }}>
+            don't have an account ?{" "}
+            <Text style={{ color: "red" }}>Swipe right to register</Text>
+          </Text>
+        </ImageBackground>
+        {/* </ScrollView> */}
+      </View>
     );
   }
 }

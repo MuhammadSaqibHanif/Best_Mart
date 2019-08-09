@@ -17,7 +17,7 @@ class ContentView extends React.Component {
   render() {
     const { navigate } = this.props.menu.navigation;
 
-    console.log("this.props", this.props);
+    // console.log("this.props", this.props);
 
     return (
       <View
@@ -32,6 +32,8 @@ class ContentView extends React.Component {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            alignSelf: "center",
+            alignContent: "center",
             width: "100%",
             padding: 15
           }}
@@ -39,7 +41,7 @@ class ContentView extends React.Component {
           <TouchableOpacity onPress={() => navigate("Home")}>
             <Image
               source={require("../images/bestmart-back.png")}
-              style={{        
+              style={{
                 width: 200,
                 height: 70
               }}
@@ -48,7 +50,25 @@ class ContentView extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <View
+        {this.props.user && this.props.user.userData && (
+          <View
+            style={{ alignSelf: "center", marginBottom: 10, marginTop: 10 }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                color: "red",
+                // marginTop: 10,
+                // marginLeft: 10,
+                fontWeight: "bold"
+              }}
+            >
+              {this.props.user.userData.name}
+            </Text>
+          </View>
+        )}
+
+        {/* <View
           style={{
             marginTop: 10,
             marginBottom: 5,
@@ -61,14 +81,15 @@ class ContentView extends React.Component {
             source={require("../images/man.png")}
             style={{ width: 100, height: 100 }}
           />
-        </View>
+        </View> */}
 
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
             width: "100%",
-            alignItems: "center"
+            alignItems: "center",
+            marginTop: 10
           }}
         >
           <View
@@ -80,7 +101,7 @@ class ContentView extends React.Component {
               alignItems: "center"
             }}
           >
-            <Image source={require("../images/sweater.png")} />
+            <Image source={require("../images/account.png")} />
           </View>
 
           <View
@@ -121,7 +142,7 @@ class ContentView extends React.Component {
               alignItems: "center"
             }}
           >
-            <Image source={require("../images/sweater.png")} />
+            <Image source={require("../images/cart.png")} />
           </View>
 
           <View
@@ -141,6 +162,148 @@ class ContentView extends React.Component {
               }
             >
               <Text style={{ padding: 14, color: "white" }}>MY ORDER</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%",
+            alignItems: "center"
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              width: 50,
+              height: 50,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Image source={require("../images/support(acc).png")} />
+          </View>
+
+          <View
+            style={{
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
+              borderTopColor: "white",
+              borderBottomColor: "white",
+              width: "80%"
+            }}
+          >
+            <TouchableOpacity onPress={() => navigate("ContactUs")}>
+              <Text style={{ padding: 14, color: "white" }}>CONTACT US</Text>
+            </TouchableOpacity>
+          </View>
+        </View> */}
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%",
+            alignItems: "center"
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              width: 50,
+              height: 50,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Image source={require("../images/salad.png")} />
+          </View>
+
+          <View
+            style={{
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
+              borderTopColor: "white",
+              borderBottomColor: "white",
+              width: "80%"
+            }}
+          >
+            <TouchableOpacity onPress={() => navigate("AboutUs")}>
+              <Text style={{ padding: 14, color: "white" }}>ABOUT US</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%",
+            alignItems: "center"
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              width: 50,
+              height: 50,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Image source={require("../images/check.png")} />
+          </View>
+
+          <View
+            style={{
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
+              borderTopColor: "white",
+              borderBottomColor: "white",
+              width: "80%"
+            }}
+          >
+            <TouchableOpacity onPress={() => navigate("Newsletter")}>
+              <Text style={{ padding: 14, color: "white" }}>NEWSLETTER</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%",
+            alignItems: "center"
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              width: 50,
+              height: 50,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Image source={require("../images/like.png")} />
+          </View>
+
+          <View
+            style={{
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
+              borderTopColor: "white",
+              borderBottomColor: "white",
+              width: "80%"
+            }}
+          >
+            <TouchableOpacity onPress={() => navigate("DealsDiscounts")}>
+              <Text style={{ padding: 14, color: "white" }}>
+                DEALS & DISCOUNTS
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

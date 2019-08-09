@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { Container, Root, Body, Header, Left, Button, Icon } from "native-base";
 import { Col, Grid } from "react-native-easy-grid";
+import Spinner from "react-native-loading-spinner-overlay";
 
 import SubChildCategoriesBox from "../components/SubChildCategoriesBox";
 import SubChildCategoriesSideBar from "../components/SubChildCategoriesSideBar";
+import { SUBCATEGORY_PRODUCTS } from "../Api";
 
 class ChildCategories extends Component {
   static navigationOptions = {
@@ -14,6 +16,7 @@ class ChildCategories extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       data: [],
       showChildData: false,
       initialData: [],
@@ -22,9 +25,11 @@ class ChildCategories extends Component {
   }
 
   getSubCategoriesId = sub_category => {
-    fetch(
-      `https://bestmart.com.pk/bestmart_api/Get/get_productsbysubcategory.php?sub_category=${sub_category}`
-    )
+    this.setState({
+      loading: true
+    });
+
+    fetch(`${SUBCATEGORY_PRODUCTS}?sub_category=${sub_category}`)
       .then(res => res.json())
       .then(response => {
         if (response[0].id) {
@@ -37,15 +42,26 @@ class ChildCategories extends Component {
             data: false
           });
         }
+        this.setState({
+          loading: false
+        });
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        this.setState({
+          loading: false
+        });
+      });
   };
 
   componentDidMount() {
+    console.log(
+      "///////////////////////",
+      this.props.navigation.state.params.value.sub_category
+    );
+
     fetch(
-      `https://bestmart.com.pk/bestmart_api/Get/get_productsbysubcategory.php?sub_category=${
-        this.props.navigation.state.params.value.sub_category
-      }`
+      `${SUBCATEGORY_PRODUCTS}?sub_category=${this.props.navigation.state.params.value.sub_category}`
     )
       .then(res => res.json())
       .then(response => {
@@ -65,10 +81,23 @@ class ChildCategories extends Component {
 
   render() {
     const { childData, navigate } = this.props.navigation.state.params;
-    const { data, showChildData, initialData, showInitialData } = this.state;
+    const {
+      data,
+      showChildData,
+      initialData,
+      showInitialData,
+      loading
+    } = this.state;
 
     return (
       <Root>
+        <Spinner
+          visible={loading}
+          textContent={"Loading..."}
+          textStyle={{
+            color: "#FFF"
+          }}
+        />
         <Header style={{ backgroundColor: "#3D3B48", marginTop: 22 }}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>

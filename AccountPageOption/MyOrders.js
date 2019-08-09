@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { updateUser } from "../Redux/actions/authActions";
 import { ScrollView } from "react-native-gesture-handler";
 import ContentView from "../screen/Drawer";
+import { ALL_ORDERS } from "../Api";
 
 let total_price_array = [];
 
@@ -24,7 +25,7 @@ class MyOrders extends Component {
     this.props.user &&
       this.props.user.UserId &&
       fetch(
-        `https://bestmart.com.pk/bestmart_api/Get/get_all_orders.php?user_id=${this.props.user.UserId}`
+        `${ALL_ORDERS}?user_id=${this.props.user.UserId}`
       )
         .then(res => res.json())
         .then(response => {

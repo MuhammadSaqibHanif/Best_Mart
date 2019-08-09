@@ -1,19 +1,38 @@
 import React, { Component } from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { Card } from "native-base";
+import Spinner from "react-native-loading-spinner-overlay";
+import { DETAIL_PRODUCT } from "../Api";
 
 class SubChildCategoriesBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false
+    };
+  }
+
   navigateFunc = id => {
-    fetch(
-      `https://bestmart.com.pk/bestmart_api/Get/get_product_details.php?product_id=${id}`
-    )
+    this.setState({
+      loading: true
+    });
+
+    fetch(`${DETAIL_PRODUCT}?product_id=${id}`)
       .then(res => res.json())
       .then(response => {
+        this.setState({
+          loading: false
+        });
         if (response[0].id) {
           this.props.navigate("ProductView", { response });
         }
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        this.setState({
+          loading: false
+        });
+      });
   };
 
   render() {
@@ -31,6 +50,13 @@ class SubChildCategoriesBox extends Component {
 
     return (
       <View>
+        <Spinner
+          visible={this.state.loading}
+          textContent={"Loading..."}
+          textStyle={{
+            color: "#FFF"
+          }}
+        />
         {showChildData ? (
           childData ? (
             <View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap" }}>
@@ -39,7 +65,7 @@ class SubChildCategoriesBox extends Component {
                   key={value.id}
                   style={{
                     width: "49%",
-                    height: 130,
+                    height: 200,
                     borderWidth: 1,
                     borderRadius: 2,
                     borderColor: "#ddd",
@@ -58,7 +84,7 @@ class SubChildCategoriesBox extends Component {
                   <Image
                     source={{ uri: value.image }}
                     style={{ flex: 1 }}
-                    resizeMode="cover"
+                    resizeMode="contain"
                   />
                   <View>
                     <Text
@@ -114,7 +140,7 @@ class SubChildCategoriesBox extends Component {
                 key={value.id}
                 style={{
                   width: "49%",
-                  height: 130,
+                  height: 200,
                   borderWidth: 1,
                   borderRadius: 2,
                   borderColor: "#ddd",

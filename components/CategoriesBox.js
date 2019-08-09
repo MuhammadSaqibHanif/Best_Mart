@@ -5,7 +5,7 @@ import { Card } from "native-base";
 class CategoriesBox extends Component {
   render() {
     const { navigate, childData, showchildData } = this.props;
-
+    
     return (
       <View>
         {showchildData ? (
@@ -15,7 +15,7 @@ class CategoriesBox extends Component {
                 key={value.id}
                 style={{
                   width: "49%",
-                  height: 130,
+                  height: 200,
                   borderWidth: 1,
                   borderRadius: 2,
                   borderColor: "#ddd",
@@ -40,7 +40,7 @@ class CategoriesBox extends Component {
                 <Image
                   source={{ uri: value.image }}
                   style={{ flex: 1 }}
-                  resizeMode="cover"
+                  resizeMode="contain"
                 />
                 <View>
                   <Text

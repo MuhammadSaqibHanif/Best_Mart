@@ -20,7 +20,7 @@ class CategoriesSideBar extends Component {
                 <Image
                   style={{ height: 60 }}
                   source={{ uri: value.image }}
-                  resizeMode="cover"
+                  resizeMode="contain"
                 />
                 <View
                   style={{

@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Divider } from "react-native-elements";
+import Spinner from "react-native-loading-spinner-overlay";
+import { CATEGORIES, SUBCATEGORIES_PARENT } from "../Api";
 
 class CategoriesHome extends Component {
   state = {
-    data: []
+    data: [],
+    loading: false
   };
 
   componentWillMount() {
-    fetch("https://bestmart.com.pk/bestmart_api/Get/get_categories.php")
+    this.setState({
+      loading: true
+    });
+
+    fetch(`${CATEGORIES}`)
       .then(res => res.json())
       .then(response => {
         if (response[0].category) {
@@ -16,11 +23,23 @@ class CategoriesHome extends Component {
             data: response
           });
         }
+
+        this.setState({
+          loading: false
+        });
       })
-      .catch(() => {});
+      .catch(() => {
+        this.setState({
+          loading: false
+        });
+      });
   }
 
   navigateFunc = (value, navigate) => {
+    this.setState({
+      loading: true
+    });
+
     let category_name = value.category.replace(/\s+/g, "_").replace("&", "And");
 
     if (category_name == "Stationery") {
@@ -29,9 +48,7 @@ class CategoriesHome extends Component {
 
     // console.log("category_name >>>>>>>>>>>>>>>>", category_name);
 
-    fetch(
-      `https://bestmart.com.pk/bestmart_api/Get/get_subcategories_by_parent.php?category=${category_name}`
-    )
+    fetch(`${SUBCATEGORIES_PARENT}?category=${category_name}`)
       .then(res => res.json())
       .then(response => {
         // console.log("get_subcategories_by_parent", response);
@@ -41,18 +58,32 @@ class CategoriesHome extends Component {
             response
           });
         }
+
+        this.setState({
+          loading: false
+        });
       })
       .catch(err => {
         console.log("get_subcategories_by_parent", err);
+        this.setState({
+          loading: false
+        });
       });
   };
 
   render() {
     const { Heading, navigate } = this.props;
-    const { data } = this.state;
+    const { data, loading } = this.state;
 
     return (
       <View style={{ flexDirection: "column" }}>
+        <Spinner
+          visible={loading}
+          textContent={"Loading..."}
+          textStyle={{
+            color: "#FFF"
+          }}
+        />
         <View>
           <Text
             style={{
@@ -78,8 +109,8 @@ class CategoriesHome extends Component {
             <TouchableOpacity
               key={value.id}
               style={{
-                width: "49.3%",
-                height: 130,
+                width: "49%",
+                height: 180,
                 borderWidth: 1,
                 borderRadius: 2,
                 borderColor: "#ddd",
@@ -97,8 +128,8 @@ class CategoriesHome extends Component {
             >
               <Image
                 source={{ uri: value.image }}
-                style={{  flex: 1 }}
-                resizeMode="cover"
+                style={{ flex: 1 }}
+                resizeMode="contain"
               />
               <View>
                 <Text

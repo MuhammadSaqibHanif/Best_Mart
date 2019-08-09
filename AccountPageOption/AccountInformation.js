@@ -13,6 +13,7 @@ import {
 } from "native-base";
 import { connect } from "react-redux";
 import { updateUser } from "../Redux/actions/authActions";
+import { PROFILE } from "../Api";
 
 class AccountInformation extends Component {
   static navigationOptions = {
@@ -30,11 +31,8 @@ class AccountInformation extends Component {
     this.props.user &&
       this.props.user.UserId &&
       fetch(
-        `https://bestmart.com.pk/bestmart_api/Get/profile.php?id=${
-          this.props.user.UserId
-        }`
+        `${PROFILE}?id=${this.props.user.UserId}`
       )
-      // fetch(`https://bestmart.com.pk/bestmart_api/Get/profile.php?id=6`)
         .then(res => res.json())
         .then(response => {
           if (response[0]) {
@@ -170,9 +168,7 @@ class AccountInformation extends Component {
                 </Text>
                 <Text style={{ fontSize: 16 }}>{response[0].city}</Text>
               </ListItem>
-             
-             
-             
+
               <ListItem
                 style={{
                   flex: 1,
@@ -185,7 +181,6 @@ class AccountInformation extends Component {
                 </Text>
                 <Text style={{ fontSize: 16 }}>{response[0].id}</Text>
               </ListItem>
-             
             </Card>
           )}
         </View>

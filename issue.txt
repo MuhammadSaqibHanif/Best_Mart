@@ -1,8 +1,10 @@
 
-sign up and sign in <ActivityIndicator />
-checkout page insert sign in api
-
 Your! order has been booked! We will contact you soon.
+
+loader on every category change
+out of stock order not checkout
+
+change splash
 
 Home
 CategoriesHome Ok

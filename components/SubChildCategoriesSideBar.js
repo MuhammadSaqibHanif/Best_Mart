@@ -20,7 +20,7 @@ class ChildCategoriesSideBar extends Component {
                 <Image
                   style={{ height: 60 }}
                   source={{ uri: val.image }}
-                  resizeMode="cover"
+                  resizeMode="contain"
                 />
                 <View
                   style={{

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView } from "react-native";
-import { Constants } from "expo";
 import { Header, Body } from "native-base";
-import { Overlay } from "react-native-elements";
 import { connect } from "react-redux";
 import { updateUser } from "../Redux/actions/authActions";
 import CheckoutBillingAddress from "../components/CheckoutBillingAddress";
 import CheckoutAlreadyACustomer from "../components/CheckoutAlreadyACustomer";
 import CheckoutYourOrder from "../components/CheckoutYourOrder";
+import { CHECKOUT } from "../Api";
 
 class Checkout extends Component {
   static navigationOptions = {
@@ -18,12 +17,16 @@ class Checkout extends Component {
     super(props);
     this.state = {
       showYourOrder: false,
-      product_id: [],
-      price: [],
-      paymentMethod: "Cash on delivery",
-      isVisible: true
+      updateLoginData: false,
+      paymentMethod: "cod"
     };
   }
+
+  _updateLoginData = () => {
+    this.setState({
+      updateLoginData: true
+    });
+  };
 
   _saveCheckoutBillingData = (
     name,
@@ -37,20 +40,6 @@ class Checkout extends Component {
     phone,
     ordernotes
   ) => {
-    console.log(
-      "_saveCheckoutBillingData",
-      name,
-      email,
-      country,
-      town_city,
-      address,
-      state_division,
-      deliverytime,
-      deliveryDate,
-      phone,
-      ordernotes
-    );
-
     this.setState({
       name,
       email,
@@ -67,8 +56,6 @@ class Checkout extends Component {
   };
 
   _submitOrder = checkBoxName => {
-    console.log("checkBoxName", checkBoxName);
-
     this.setState({ paymentMethod: checkBoxName }, () => {
       this.checkOut();
     });
@@ -84,7 +71,6 @@ class Checkout extends Component {
       address,
       state_division,
       deliverytime,
-      deliveryDate,
       phone,
       ordernotes
     } = this.state;
@@ -96,50 +82,11 @@ class Checkout extends Component {
       price
     } = this.props.navigation.state.params;
 
-    // this.props.user && this.props.user.CartData
-    // ?
     Object.values(this.props.user.CartData).map((value, index) => {
       const thisPrice = value.selling_price;
-      console.log(" product_id: [...prevState.product_id, value.id]", value.id);
 
       if (Object.keys(this.props.user.CartData).length == index + 1) {
         this.setState({ ready: "Yes" }, () => {
-          console.log(
-            "this.props.user.CartData***************",
-            this.props.user.UserId,
-            "*",
-            name,
-            "*",
-            this.props.user.userData.company_name,
-            "*",
-            address,
-            "*",
-            country,
-            "*",
-            town_city,
-            "*",
-            state_division,
-            "*",
-            deliverytime,
-            "*",
-            email,
-            "*",
-            phone,
-            "*",
-            ordernotes,
-            "*",
-            paymentMethod,
-            "*",
-            product_id,
-            "*",
-            perProductQuantities,
-            "*",
-            price,
-            "*",
-            grandTotal,
-            "*"
-          );
-
           let formData = new FormData();
           formData.append(
             "user_id",
@@ -165,19 +112,17 @@ class Checkout extends Component {
           formData.append("total_price", grandTotal);
           formData.append("shipping_charges", "150");
           formData.append("description", "");
-          formData.append("tax", "");
+          formData.append("tax", "0");
 
-          fetch("https://bestmart.com.pk/bestmart_api/Post/checkout.php", {
+          fetch(`${CHECKOUT}`, {
             body: formData,
             method: "POST"
           })
             .then(res => res.json())
             .then(response => {
-              console.log("sign-up response", response);
+              console.log("checkout response >>>", response);
 
               if (response == "Success") {
-                console.log("Success >>>>>>>>>>>>>>");
-
                 this.props.updateUser({
                   UserId: this.props.user.UserId,
                   userData: this.props.user.userData
@@ -195,7 +140,7 @@ class Checkout extends Component {
                   deliveryDate: "",
                   phone: "",
                   ordernotes: "",
-                  paymentMethod: "Cash on delivery"
+                  paymentMethod: "cod"
                 });
 
                 alert("Checkout Successfully!");
@@ -206,33 +151,16 @@ class Checkout extends Component {
               }
             })
             .catch(error => {
-              console.log("error >>>>>>>>>>", error);
+              console.log("error >>>", error);
               alert("Network Error");
             });
         });
       }
     });
-    // : alert("You are not Login");
-    // this.props.navigation.navigate("GuestLogin");
   };
 
   render() {
-    const { showYourOrder, isVisible } = this.state;
-
-    const {
-      perProductQuantities,
-      grandTotal,
-      product_id,
-      price
-    } = this.props.navigation.state.params;
-
-    console.log(
-      ">>>>>>>>",
-      perProductQuantities,
-      grandTotal,
-      product_id,
-      price
-    );
+    const { showYourOrder, updateLoginData } = this.state;
 
     return (
       <View style={{ marginTop: 22, flex: 1 }}>
@@ -255,10 +183,11 @@ class Checkout extends Component {
         {/* Body */}
         <ScrollView>
           {/* CHECKOUT METHOD */}
-          <CheckoutAlreadyACustomer />
+          <CheckoutAlreadyACustomer updateLoginData={this._updateLoginData} />
 
           {/* Billing Address */}
           <CheckoutBillingAddress
+            updateLoginData={updateLoginData}
             _saveCheckoutBillingData={this._saveCheckoutBillingData}
           />
 

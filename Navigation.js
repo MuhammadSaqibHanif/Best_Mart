@@ -11,11 +11,16 @@ import Home from "./screen/Home";
 import SignInUp from "./screen/SignInUp";
 import AccountInformation from "./AccountPageOption/AccountInformation";
 import MyOrders from "./AccountPageOption/MyOrders";
+import ContactUs from "./screen/ContactUs";
+import AboutUs from "./screen/AboutUs";
+import Newsletter from "./screen/Newsletter";
+import DealsDiscounts from "./screen/DealsDiscounts";
+import ForgetPassword from "./screen/ForgetPassword";
+// import CategoriesScreenHome from "./screen/CategoriesScreenHome";
 
 import Categories from "./screen/Categories";
 
 import Cart from "./screen/Cart";
-import ChildCategories from "./screen/ChildCategories";
 import SubChildCategories from "./screen/SubChildCategories";
 import ProductView from "./screen/ProductView";
 import Checkout from "./screen/Checkout";
@@ -33,7 +38,13 @@ const tabBarOptions = {
 const HomeStack = createStackNavigator({
   Home: Home,
   AccountInformation: AccountInformation,
-  MyOrders: MyOrders
+  MyOrders: MyOrders,
+  ContactUs: ContactUs,
+  AboutUs: AboutUs,
+  Newsletter: Newsletter,
+  DealsDiscounts: DealsDiscounts,
+  ForgetPassword: ForgetPassword,
+  // CategoriesScreenHome: CategoriesScreenHome
 });
 
 HomeStack.navigationOptions = ({ navigation }) => {
@@ -57,7 +68,6 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 const CategoriesStack = createStackNavigator({
   Categories: Categories,
-  ChildCategories: ChildCategories,
   SubChildCategories: SubChildCategories,
   ProductView: ProductView
 });

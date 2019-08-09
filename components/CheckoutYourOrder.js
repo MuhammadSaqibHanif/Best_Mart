@@ -16,7 +16,7 @@ class CheckoutYourOrder extends Component {
       checkBox2: false,
       checkBox3: false,
       checkBox4: false,
-      checkBoxName: "Cash on delivery"
+      checkBoxName: "cod"
     };
   }
 
@@ -27,15 +27,6 @@ class CheckoutYourOrder extends Component {
     checkBox3,
     checkBox4
   ) => {
-    console.log(
-      "checkBoxName, checkBox1, checkBox2, checkBox3, checkBox4",
-      checkBoxName,
-      checkBox1.checkBox1,
-      checkBox2.checkBox2,
-      checkBox3.checkBox3,
-      checkBox4.checkBox4
-    );
-
     this.setState({
       checkBoxName,
       checkBox1: checkBox1.checkBox1,
@@ -88,7 +79,7 @@ class CheckoutYourOrder extends Component {
                 <TouchableOpacity
                   onPress={() =>
                     this._getCheckboxValue(
-                      "Cash on delivery",
+                      "cod",
                       { checkBox1: true },
                       { checkBox2: checkBox2 && false },
                       { checkBox3: checkBox3 && false },
