@@ -113,7 +113,9 @@ export default class CustomerSupport extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() =>
-                  Linking.openURL("https://instagram.com/bestmart123")
+                  Linking.openURL(
+                    "https://www.instagram.com/official_bestmart/"
+                  )
                 }
               >
                 <SocialIcon type="instagram" />

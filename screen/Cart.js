@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
-import { Card, Header, Body } from "native-base";
+import { Card, Header, Body, Button } from "native-base";
 import { connect } from "react-redux";
 import { updateUser } from "../Redux/actions/authActions";
+import Modal from "react-native-modal";
 import Counter from "../components/Counter";
 import Spinner from "react-native-loading-spinner-overlay";
 
@@ -16,6 +17,7 @@ class Cart extends Component {
     this.state = {
       isModalVisible: false,
       id: "",
+      whichModal: false,
       click: "1",
       product_id: [],
       price: [],
@@ -25,9 +27,10 @@ class Cart extends Component {
     };
   }
 
-  _toggleModal = id =>
+  _toggleModal = (flag, id) =>
     this.setState({
       isModalVisible: !this.state.isModalVisible,
+      whichModal: flag,
       id
     });
 
@@ -47,7 +50,7 @@ class Cart extends Component {
             price: [...prevState.price, thisPrice],
             grandTotal:
               Number(prevState.grandTotal) +
-              Number(thisPrice) * Number(quantityClick)
+              Number(thisPrice) 
           }));
 
           if (Object.keys(this.props.user.CartData).length == index + 1) {
@@ -111,7 +114,7 @@ class Cart extends Component {
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, whichModal, id } = this.state;
 
     return (
       <View style={{ marginTop: 22, flex: 1 }}>
@@ -298,7 +301,9 @@ class Cart extends Component {
                               }}
                             >
                               <TouchableOpacity
-                                onPress={() => this._toggleModal(value.id)}
+                                onPress={() =>
+                                  this._toggleModal("remove", value.id)
+                                }
                               >
                                 <Text style={{ color: "red" }}>Remove</Text>
                               </TouchableOpacity>
@@ -312,6 +317,134 @@ class Cart extends Component {
               })}
           </ScrollView>
         )}
+        <Modal isVisible={this.state.isModalVisible} backdropColor="white">
+          {whichModal == "checkOut" && (
+            <View>
+              <View>
+                {/* <Item>
+                    <Input
+                      placeholder="First Name"
+                      value={firstName}
+                      onChangeText={text => this.setState({ firstName: text })}
+                    />
+                  </Item>
+                  <Item>
+                    <Input
+                      placeholder="Last Name"
+                      value={lastName}
+                      onChangeText={text => this.setState({ lastName: text })}
+                    />
+                  </Item>
+                  <Item>
+                    <Input
+                      placeholder="Phone"
+                      value={phone}
+                      onChangeText={text => this.setState({ phone: text })}
+                    />
+                  </Item>
+                  <Item>
+                    <Input
+                      placeholder="Address"
+                      value={address}
+                      onChangeText={text => this.setState({ address: text })}
+                    />
+                  </Item> */}
+                <Button
+                  block
+                  onPress={() => this.checkOut()}
+                  style={{ backgroundColor: "#ff6801", marginBottom: 40 }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      textAlign: "center"
+                    }}
+                  >
+                    Confirm Check Out
+                  </Text>
+                </Button>
+                <Button block onPress={this._toggleModal}>
+                  <Text
+                    style={{
+                      color: "white",
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      textAlign: "center"
+                    }}
+                  >
+                    Cancel
+                  </Text>
+                </Button>
+              </View>
+            </View>
+          )}
+          {whichModal == "remove" && (
+            <View>
+              <Button
+                block
+                onPress={() => this.removeCart(id)}
+                style={{ backgroundColor: "#ff6801", marginBottom: 40 }}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    textAlign: "center"
+                  }}
+                >
+                  Confirm Remove
+                </Text>
+              </Button>
+              <Button block onPress={this._toggleModal}>
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    textAlign: "center"
+                  }}
+                >
+                  Cancel
+                </Text>
+              </Button>
+            </View>
+          )}
+          {whichModal == "loginOrGuest" && (
+            <View>
+              <Button
+                block
+                onPress={() => this.removeCart(id)}
+                style={{ backgroundColor: "#ff6801", marginBottom: 40 }}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    textAlign: "center"
+                  }}
+                >
+                  Confirm Remove
+                </Text>
+              </Button>
+              <Button block onPress={this._toggleModal}>
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    textAlign: "center"
+                  }}
+                >
+                  Cancel
+                </Text>
+              </Button>
+            </View>
+          )}
+        </Modal>
       </View>
     );
   }

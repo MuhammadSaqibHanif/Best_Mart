@@ -5,7 +5,10 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
+Api/**/*
 *.txt
-yarn-error.log
 package-lock.json
-Api/
+*.bak
+*_watchmanconfig
+*.expo
+yarn-error.log
