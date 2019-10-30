@@ -42,7 +42,7 @@ class Slider extends Component {
           images={images}
           onPress={({ index }) => alert(index)}
           customSlide={({ index, item, style, width }) => (
-            // It's important to put style here because it's got offset inside
+          
             <View
               key={index}
               style={[

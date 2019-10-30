@@ -16,10 +16,7 @@ class ContentView extends React.Component {
 
   render() {
     const { navigate } = this.props.menu.navigation;
-
-    // console.log("this.props", this.props);
-
-    return (
+ return (
       <View
         style={{
           height: Dimensions.get("window").height,
@@ -58,32 +55,15 @@ class ContentView extends React.Component {
               style={{
                 fontSize: 18,
                 color: "red",
-                // marginTop: 10,
-                // marginLeft: 10,
-                fontWeight: "bold"
+                 fontWeight: "bold"
               }}
             >
               {this.props.user.userData.name}
             </Text>
           </View>
         )}
-
-        {/* <View
-          style={{
-            marginTop: 10,
-            marginBottom: 5,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <Image
-            source={require("../images/man.png")}
-            style={{ width: 100, height: 100 }}
-          />
-        </View> */}
-
-        <View
+      
+       <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
@@ -165,43 +145,8 @@ class ContentView extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-
-        {/* <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            width: "100%",
-            alignItems: "center"
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: "white",
-              width: 50,
-              height: 50,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Image source={require("../images/support(acc).png")} />
-          </View>
-
-          <View
-            style={{
-              borderTopWidth: 1,
-              borderBottomWidth: 1,
-              borderTopColor: "white",
-              borderBottomColor: "white",
-              width: "80%"
-            }}
-          >
-            <TouchableOpacity onPress={() => navigate("ContactUs")}>
-              <Text style={{ padding: 14, color: "white" }}>CONTACT US</Text>
-            </TouchableOpacity>
-          </View>
-        </View> */}
-
-        <View
+      
+       <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",

@@ -64,17 +64,9 @@ class Home extends React.Component {
           <Header
             style={{
               backgroundColor: "#3D3B48"
-              //  height: 65
-            }}
+             }}
           >
-            {/* <View style={{ flexDirection: "row"}}>
-              <View style={{ backgroundColor: "red", height: 50, width: 50 }} />
-              <View style={{ backgroundColor: "blue", height: 50, width: 50 }} />
-              <View style={{ backgroundColor: "yellow", height: 50, width: 50 }} />
-              <View style={{ backgroundColor: "green", height: 50, width: 50 }} />
-            </View> */}
-
-            <Body
+           <Body
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -145,12 +137,10 @@ class Home extends React.Component {
                     </Badge>
                   </View>
                 </TouchableOpacity>
-                {/* <Image source={require("../images/like.png")} /> */}
-              </View>
+                </View>
             </Body>
           </Header>
 
-          {/* Body */}
           <ScrollView>
             <View style={{ marginBottom: 10 }}>
               <ImageSlider />

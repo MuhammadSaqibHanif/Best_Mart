@@ -33,8 +33,7 @@ class SearchBoxHome extends React.Component {
       ? fetch(`${SEARCH}?name=${this.state.search}`)
           .then(res => {
             res.json().then(data => {
-              console.log("search_products data", data);
-              if (data[0].category) {
+             if (data[0].category) {
                 this.setState({
                   searchFood: data,
                   loading: false
@@ -115,8 +114,7 @@ class SearchBoxHome extends React.Component {
           </View>
         </KeyboardAvoidingView>
 
-        {/* After searching shows this */}
-        <View style={{ marginTop: 10, marginBottom: 10 }}>
+      <View style={{ marginTop: 10, marginBottom: 10 }}>
           {this.state.searchFood &&
             this.state.searchFood.map(value => (
               <TouchableOpacity

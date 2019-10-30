@@ -45,9 +45,7 @@ class SubChildCategoriesBox extends Component {
     } = this.props;
 
     const childData = data;
-
-    // console.log('childData SubChildCategoriesBox', childData)
-
+  
     return (
       <View>
         <Spinner

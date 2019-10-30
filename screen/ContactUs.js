@@ -96,10 +96,7 @@ class ContactUs extends Component {
 
   render() {
     const { name, phone, email, subject, message, loading } = this.state;
-
-    // console.log("***", name, phone, email, subject, message);
-
-    return (
+  return (
       <View style={{ flex: 1, marginTop: 22 }}>
         <Spinner
           visible={this.state.loading}
@@ -116,22 +113,16 @@ class ContactUs extends Component {
                   backgroundColor: "A8A8A8",
                   flexDirection: "column",
                   alignItems: "center",
-                  // width: "90%",
                   borderRadius: 6,
                   marginTop: 20,
                   justifyContent: "center"
                 }}
               >
-                {/* <Image
-                  source={require("../images/account.png")}
-                  style={{ position: "absolute", top: -15, zIndex: 1 }}
-                /> */}
-                <Text
+               <Text
                   style={{
                     marginTop: 20,
                     fontSize: 20,
                     fontWeight: "500"
-                    // color: "white"
                   }}
                 >
                   CONTACT US
@@ -292,10 +283,7 @@ class ContactUs extends Component {
                   }}
                 >
                   <TouchableOpacity
-                  // onPress={() => {
-                  //   this.signUp();
-                  // }}
-                  >
+                    >
                     <Text style={{ textAlign: "justify", color: "white" }}>
                       SUBMIT
                     </Text>

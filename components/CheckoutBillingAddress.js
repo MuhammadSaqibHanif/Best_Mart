@@ -180,10 +180,6 @@ class CheckoutBillingAddress extends ValidationComponent {
       ordernotes
     } = this.state;
 
-    // console.log("CheckoutBillingAddress >>>");
-    // console.log("this.state", this.state);
-    // console.log("this.props", this.props);
-
     return (
       <View style={{ marginTop: 10 }}>
         <KeyboardAvoidingView behavior="padding">

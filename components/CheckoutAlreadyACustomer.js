@@ -27,10 +27,6 @@ class CheckoutAlreadyACustomer extends Component {
       loading: true
     });
 
-    // let formData = new FormData();
-    // formData.append("email", email);
-    // formData.append("password", password);
-
     fetch(`${SIGNIN}?email=${emailLogin}&password=${passwordLogin}`, {
       // body: formData,
       method: "POST"

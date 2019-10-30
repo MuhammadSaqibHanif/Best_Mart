@@ -55,12 +55,7 @@ class ChildCategories extends Component {
   };
 
   componentDidMount() {
-    console.log(
-      "///////////////////////",
-      this.props.navigation.state.params.value.sub_category
-    );
-
-    fetch(
+      fetch(
       `${SUBCATEGORY_PRODUCTS}?sub_category=${this.props.navigation.state.params.value.sub_category}`
     )
       .then(res => res.json())

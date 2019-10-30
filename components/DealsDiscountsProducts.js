@@ -20,7 +20,7 @@ class DealsDiscountsProducts extends Component {
     fetch(`${PROMOTION}`)
       .then(resp => resp.json())
       .then(response => {
-        // console.log("promotions >>>", response)
+      
         if (response[0].name) {
           this.setState({
             data: response

@@ -20,7 +20,7 @@ class Categories extends Component {
       data: [],
       childData: [],
       showchildData: false,
-      stopHomeData: false // ****************
+      stopHomeData: false
     };
   }
 
@@ -82,13 +82,11 @@ class Categories extends Component {
     fetch(`${SUBCATEGORIES_PARENT}?category=${category_name}`)
       .then(res => res.json())
       .then(response => {
-        // console.log("get_subcategories_by_parent >>>", response);
-
         if (response[0].id) {
           this.setState({
             childData: response,
             showchildData: true,
-            stopHomeData: true // ********************
+            stopHomeData: true
           });
 
           this.props.navigation.setParams({ response: false });

@@ -321,34 +321,7 @@ class Cart extends Component {
           {whichModal == "checkOut" && (
             <View>
               <View>
-                {/* <Item>
-                    <Input
-                      placeholder="First Name"
-                      value={firstName}
-                      onChangeText={text => this.setState({ firstName: text })}
-                    />
-                  </Item>
-                  <Item>
-                    <Input
-                      placeholder="Last Name"
-                      value={lastName}
-                      onChangeText={text => this.setState({ lastName: text })}
-                    />
-                  </Item>
-                  <Item>
-                    <Input
-                      placeholder="Phone"
-                      value={phone}
-                      onChangeText={text => this.setState({ phone: text })}
-                    />
-                  </Item>
-                  <Item>
-                    <Input
-                      placeholder="Address"
-                      value={address}
-                      onChangeText={text => this.setState({ address: text })}
-                    />
-                  </Item> */}
+            
                 <Button
                   block
                   onPress={() => this.checkOut()}

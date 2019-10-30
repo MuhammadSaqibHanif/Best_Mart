@@ -29,8 +29,6 @@ export default class CustomerSupport extends React.Component {
   };
 
   render() {
-    // const { navigate } = this.props.navigation;
-
     return (
       <Drawer
         ref={ref => {

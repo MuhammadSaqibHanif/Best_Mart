@@ -180,18 +180,13 @@ class Checkout extends Component {
             </View>
           </Body>
         </Header>
-        {/* Body */}
         <ScrollView>
-          {/* CHECKOUT METHOD */}
           <CheckoutAlreadyACustomer updateLoginData={this._updateLoginData} />
-
-          {/* Billing Address */}
-          <CheckoutBillingAddress
+            <CheckoutBillingAddress
             updateLoginData={updateLoginData}
             _saveCheckoutBillingData={this._saveCheckoutBillingData}
           />
 
-          {/* Your Order */}
           {showYourOrder && (
             <CheckoutYourOrder _submitOrder={this._submitOrder} />
           )}

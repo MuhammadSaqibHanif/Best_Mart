@@ -16,17 +16,12 @@ import AboutUs from "./screen/AboutUs";
 import Newsletter from "./screen/Newsletter";
 import DealsDiscounts from "./screen/DealsDiscounts";
 import ForgetPassword from "./screen/ForgetPassword";
-// import CategoriesScreenHome from "./screen/CategoriesScreenHome";
-
 import Categories from "./screen/Categories";
-
 import Cart from "./screen/Cart";
 import SubChildCategories from "./screen/SubChildCategories";
 import ProductView from "./screen/ProductView";
 import Checkout from "./screen/Checkout";
-
 import CustomerSupport from "./screen/CustomerSupport";
-
 const tabBarOptions = {
   style: {
     backgroundColor: "red"
@@ -44,16 +39,11 @@ const HomeStack = createStackNavigator({
   Newsletter: Newsletter,
   DealsDiscounts: DealsDiscounts,
   ForgetPassword: ForgetPassword,
-  // CategoriesScreenHome: CategoriesScreenHome
-});
+ });
 
 HomeStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  // if (navigation.state.index != 0) {
-  //   tabBarVisible = true;
-  // }
-
-  return {
+   return {
     tabBarVisible,
     tabBarLabel: " ",
     tabBarIcon: ({ tintColor }) => (
@@ -116,8 +106,6 @@ CustomerStack.navigationOptions = {
   ),
   tabBarOptions
 };
-
-// Create Bottom Tab Navigator
 const bottomNavigator = createBottomTabNavigator({
   HomeStack,
   CategoriesStack,

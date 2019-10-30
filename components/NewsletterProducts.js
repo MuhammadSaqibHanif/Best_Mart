@@ -20,7 +20,6 @@ class NewsletterProducts extends Component {
     fetch(`${NEWSLETTER}`)
       .then(resp => resp.json())
       .then(response => {
-        // console.log("newsletter >>>", response)
         if (response[0].name) {
           this.setState({
             data: response
@@ -48,9 +47,7 @@ class NewsletterProducts extends Component {
     )
       .then(res => res.json())
       .then(response => {
-        // console.log("get_product_details >>>", response)
-
-        this.setState({
+       this.setState({
           loading: false
         });
 

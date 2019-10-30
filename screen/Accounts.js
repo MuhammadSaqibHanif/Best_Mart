@@ -86,7 +86,6 @@ class Accounts extends Component {
         if (responseLAL == "") {
           Toast.show({
             text: "Log Out Again Please!",
-            // buttonText: "Ok",
             position: "bottom",
             duration: 5000,
             type: "success"
@@ -218,24 +217,7 @@ class Accounts extends Component {
                   </View>
                 </TouchableOpacity>
                 <View style={{ borderBottomWidth: 0.5 }} />
-                {/* <TouchableOpacity onPress={() => navigate("Policies")}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      marginLeft: 15,
-                      marginTop: 5,
-                      padding: 10
-                    }}
-                  >
-                    <Image
-                      source={require("../images/document.png")}
-                      style={{ height: 20, width: 20 }}
-                    />
-                    <Text style={{ marginLeft: 30, fontSize: 14 }}>
-                      Policies
-                    </Text>
-                  </View>
-                </TouchableOpacity> */}
+            
                 <View style={{ borderBottomWidth: 0.5 }} />
                 <TouchableOpacity onPress={() => navigate("DeliveryInfo")}>
                   <View

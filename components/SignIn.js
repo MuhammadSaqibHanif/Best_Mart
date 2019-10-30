@@ -31,47 +31,19 @@ class SignIn extends Component {
     this.setState({
       showActivityIndicator: true
     });
-
-    // let deviceSerial = null;
-    // try {
-    //   deviceSerial = Constants.deviceId;
-    //   console.log("DEVICE ID FOUND: " + deviceSerial);
-    // } catch (e) {
-    //   console.log("error reading device ID");
-    // }
-
-    // let formData = new FormData();
-    // formData.append("email", email);
-    // formData.append("password", password);
-
+   
     fetch(`${SIGNIN}?email=${email}&password=${password}`, {
-      // body: formData,
       method: "POST"
     })
       .then(res => res.json())
       .then(response => {
         console.log("reponse Signin", response);
-        // console.log("reponse Signin", response[0].name);
-
         this.setState({
           showActivityIndicator: false
         });
 
         if (response[0].id) {
-          // let formDataLoginActivity = new FormData();
-          // formDataLoginActivity.append("ip_address", deviceSerial);
-          // formDataLoginActivity.append("user_id", response);
-          // formDataLoginActivity.append("status", 0);
-
-          //   body: formDataLoginActivity,
-          //   method: "post"
-          // })
-          //   .then(resLAL => resLAL.json())
-          //   .then(responseLAL => {
-          // console.log("reponse Login Activity", responseLAL);
-
-          // if (responseLAL == "success") {
-          if (this.props.user) {
+        if (this.props.user) {
             if (this.props.user.CartData) {
               this.props.updateUser({
                 CartData: {
@@ -102,43 +74,9 @@ class SignIn extends Component {
           });
 
           this.props.navigate("Home");
-          // }
-          // if (responseLAL == "") {
-          //   Toast.show({
-          //     text: "Sign In Again Please!",
-          //     position: "top",
-          //     duration: 5000,
-          //     type: "warning"
-          //   });
-          // }
-          // })
-          // .catch(error => {
-          //   console.log("Error: login activity log*******", error);
-          //   Toast.show({
-          //     text: error,
-          //     position: "top",
-          //     duration: 5000,
-          //     type: "danger"
-          //   });
-          // });
+        
         }
-        // if (response == "success") {
-        //   Toast.show({
-        //     text: "Please wait for Approval from Admin",
-        //     position: "top",
-        //     duration: 5000,
-        //     type: "warning"
-        //   });
-        // }
-        // if (response == "") {
-        //   Toast.show({
-        //     text: "Please Sign Up to continue OR some ERROR Happens",
-        //     position: "top",
-        //     duration: 5000,
-        //     type: "danger"
-        //   });
-        // }
-      })
+        })
       .catch(error => {
         this.setState({
           showActivityIndicator: false
@@ -159,16 +97,11 @@ class SignIn extends Component {
 
     return (
       <View>
-        {/* <ScrollView> */}
-        <ImageBackground
+       <ImageBackground
           source={require("../images/log-back.jpg")}
           style={{
             height: Dimensions.get("window").height
-            // backgroundColor: "blue",
-            // flexDirection: "column",
-            // justifyContent: "center",
-            // alignItems: "center"
-          }}
+         }}
         >
           <Card
             style={{
@@ -180,14 +113,9 @@ class SignIn extends Component {
               borderRadius: 6,
               marginTop: 20,
               flex: 1
-              // justifyContent: "center"
-            }}
+           }}
           >
-            {/* <Image
-                source={require("../images/account.png")}
-                style={{ position: "absolute", top: -15, zIndex: 1 }}
-              /> */}
-            <Text
+           <Text
               style={{
                 marginTop: 20,
                 fontSize: 20,
@@ -295,14 +223,7 @@ class SignIn extends Component {
                   width: "55%"
                 }}
               >
-                {/* <CheckBox
-                  checked={true}
-                  style={{ backgroundColor: "red", borderColor: "white" }}
-                />
-                <Text style={{ marginLeft: 15, color: "white" }}>
-                  Remember Me
-                </Text> */}
-              </View>
+               </View>
               <TouchableOpacity
                 onPress={() => this.props.navigate("ForgetPassword")}
               >
@@ -332,8 +253,7 @@ class SignIn extends Component {
             <Text style={{ color: "red" }}>Swipe right to register</Text>
           </Text>
         </ImageBackground>
-        {/* </ScrollView> */}
-      </View>
+         </View>
     );
   }
 }

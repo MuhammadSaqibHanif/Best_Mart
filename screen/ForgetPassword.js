@@ -97,7 +97,6 @@ class ForgetPassword extends Component {
           <Text
             style={{
               color: "gray",
-              // fontSize: 20,
               marginBottom: 15
             }}
           >

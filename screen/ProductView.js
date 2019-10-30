@@ -142,10 +142,7 @@ class ProductView extends Component {
                       color: "#ff6801"
                     }}
                   >
-                    {/* {Number(response[0].sale_price) > 0
-                        ? `Rs : ${response[0].cost_price}`
-                        : ""} */}
-                  </Text>
+                     </Text>
                 </View>
                 <View>
                   <Text

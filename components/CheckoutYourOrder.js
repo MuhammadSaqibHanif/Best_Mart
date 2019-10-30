@@ -112,26 +112,7 @@ class CheckoutYourOrder extends Component {
                 </TouchableOpacity>
               </Body>
             </ListItem>
-
-            {/* <ListItem>
-              <CheckBox checked={checkBox3} />
-              <Body>
-                <TouchableOpacity
-                  onPress={() =>
-                    this._getCheckboxValue(
-                      "SimSim - Finja",
-                      { checkBox1: checkBox1 && false },
-                      { checkBox2: checkBox3 && false },
-                      { checkBox3: true },
-                      { checkBox4: checkBox4 && false }
-                    )
-                  }
-                >
-                  <Text style={{ fontSize: 14 }}>SimSim - Finja</Text>
-                </TouchableOpacity>
-              </Body>
-            </ListItem> */}
-
+            
             <ListItem>
               <CheckBox checked={checkBox4} />
               <Body>

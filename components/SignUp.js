@@ -41,8 +41,7 @@ class SignUp extends ValidationComponent {
       onPressButton: true
     });
 
-    // Call ValidationComponent validate method
-    this.validate({
+   this.validate({
       fullName: { required: true },
       email: { email: true, required: true },
       password: { required: true },
@@ -137,19 +136,7 @@ class SignUp extends ValidationComponent {
       phone,
       loading
     } = this.state;
-
-    // console.log(
-    //   "***",
-    //   fullName,
-    //   email,
-    //   password,
-    //   confirmPassword,
-    //   address,
-    //   country,
-    //   city,
-    //   phone
-    // );
-
+   
     return (
       <View style={{ flex: 1 }}>
         <Spinner
@@ -182,11 +169,7 @@ class SignUp extends ValidationComponent {
                     justifyContent: "center"
                   }}
                 >
-                  {/* <Image
-                    source={require("../images/account.png")}
-                    style={{ position: "absolute", top: -15, zIndex: 1 }}
-                  /> */}
-                  <Text
+                 <Text
                     style={{
                       marginTop: 20,
                       fontSize: 20,
